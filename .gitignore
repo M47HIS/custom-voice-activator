@@ -1,0 +1,63 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+.venv/
+venv/
+env/
+
+# Docker
+docker-compose.override.yml
+
+# Models
+models/
+*.bin
+*.onnx
+*.safetensors
+.huggingface/
+
+# Temp files
+*.wav
+voxtral_*.wav
+/tmp/voxtral_*.wav
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+logs/
+
+# IDE
+.idea/
+.vscode/
+*.code-workspace
+.codex/
+
+# Secrets / user config
+.env
+*.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.mobileprovision
+
+# Backend data (runtime)
+backend/data/
+
+# Swift / SwiftPM
+macos/VoiceActivator/.build/
+macos/VoiceActivator/.swiftpm/
+macos/VoiceActivator/Package.resolved
+*.xcodeproj/
+*.xcworkspace/
+DerivedData/

@@ -1,0 +1,8 @@
+# Web stack pinned to versions the security tests pass against.
+fastapi==0.139.2
+uvicorn[standard]==0.51.0
+websockets==16.1
+python-multipart==0.0.32
+# Transcription engine; bounded to the v1 series the image was built with.
+# Pin to an exact version after the next Docker image build verifies one.
+faster-whisper>=1.0.0,<2

@@ -1,0 +1,8 @@
+# Pinned to the versions verified in the installed worker venv.
+pynput==1.8.2
+sounddevice==0.5.5
+websocket-client==1.9.0
+numpy==2.4.6
+requests==2.34.2
+mlx-audio==0.4.5
+laya-mlx==0.1.0

@@ -1,0 +1,30 @@
+services:
+  voice-backend:
+    build: ./backend
+    container_name: voice-module-backend
+    ports:
+      - "127.0.0.1:8080:8080"
+    volumes:
+      - voice-module-data:/data
+    environment:
+      - DATA_DIR=/data
+      - ENGINE=${ENGINE:-faster-whisper}
+      - LANGUAGE=${LANGUAGE:-en}
+      - WHISPER_MODEL=${WHISPER_MODEL:-tiny.en}
+      - WHISPER_DEVICE=${WHISPER_DEVICE:-cpu}
+      - WHISPER_COMPUTE=${WHISPER_COMPUTE:-int8}
+      - TRANSCRIBE_COMMAND=${TRANSCRIBE_COMMAND:-}
+      - VOICE_MODULE_AUTH_TOKEN=${VOICE_MODULE_AUTH_TOKEN:-}
+      - MAX_UPLOAD_BYTES=${MAX_UPLOAD_BYTES:-26214400}
+      - MAX_TRANSCRIPTIONS_PER_MINUTE=${MAX_TRANSCRIPTIONS_PER_MINUTE:-10}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/status"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+volumes:
+  voice-module-data:
+    driver: local

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Voice Module</title>
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <main class="shell">
+      <section class="recorder" aria-labelledby="title">
+        <div class="topline">
+          <p class="eyebrow">Local voice to text</p>
+          <span id="engine" class="engine">checking engine</span>
+        </div>
+
+        <h1 id="title">Press. Speak. Copy.</h1>
+        <p class="subtitle">
+          A small Docker app for local transcription. Your microphone stays in
+          the browser, your model runs on this machine.
+        </p>
+
+        <button id="record" class="record-button" type="button" aria-pressed="false">
+          <span class="record-dot" aria-hidden="true"></span>
+          <span id="record-label">Hold to record</span>
+        </button>
+
+        <div id="status" class="status" role="status">Ready</div>
+
+        <label class="output-label" for="transcript">Transcript</label>
+        <textarea id="transcript" class="transcript" spellcheck="true" placeholder="Your transcription will appear here."></textarea>
+
+        <div class="actions">
+          <button id="copy" class="secondary" type="button" disabled>Copy</button>
+          <button id="clear" class="ghost" type="button">Clear</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

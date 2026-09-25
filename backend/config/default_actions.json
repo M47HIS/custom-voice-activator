@@ -1,0 +1,8 @@
+[
+  {
+    "name": "clipboard",
+    "description": "Copy transcribed text to clipboard",
+    "type": "clipboard",
+    "config": {}
+  }
+]

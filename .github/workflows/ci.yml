@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: macos-14
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Check Python syntax
+        env:
+          PYTHONPYCACHEPREFIX: /tmp/voice-module-pycache
+        run: python3 -m py_compile client/voice_client.py client/control_decider.py backend/main.py backend/transcriber.py
+
+      - name: Run local decision tests
+        run: PYTHONPATH=client python3 -m unittest client/test_control_decider.py -v
+
+      # faster-whisper is intentionally skipped: transcriber imports it lazily
+      # and the security tests never load a model.
+      - name: Install backend test dependencies
+        run: pip install -r <(sed '/^faster-whisper/d' backend/requirements.txt)
+
+      - name: Run backend tests
+        working-directory: backend
+        run: python3 -m unittest discover -s tests -v
+
+      - name: Run Swift tests
+        run: swift test --package-path macos/VoiceActivator

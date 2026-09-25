@@ -1,0 +1,234 @@
+:root {
+  color-scheme: light;
+  --bg: oklch(96.5% 0.006 235);
+  --panel: oklch(99% 0.004 235);
+  --text: oklch(20% 0.018 235);
+  --muted: oklch(48% 0.018 235);
+  --line: oklch(88% 0.012 235);
+  --accent: oklch(55% 0.18 28);
+  --accent-strong: oklch(48% 0.2 28);
+  --accent-soft: oklch(93% 0.045 28);
+  --ok: oklch(53% 0.15 150);
+  --danger: oklch(52% 0.18 25);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    linear-gradient(180deg, oklch(98% 0.005 235), var(--bg) 58%),
+    var(--bg);
+  color: var(--text);
+}
+
+button,
+textarea {
+  font: inherit;
+}
+
+.shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 28px;
+}
+
+.recorder {
+  width: min(720px, 100%);
+}
+
+.topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.eyebrow,
+.engine {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.84rem;
+  font-weight: 650;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.engine {
+  text-transform: none;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: oklch(98% 0.004 235);
+}
+
+h1 {
+  margin: 0;
+  max-width: 10ch;
+  font-size: clamp(3.2rem, 10vw, 7rem);
+  line-height: 0.88;
+  letter-spacing: 0;
+}
+
+.subtitle {
+  max-width: 58ch;
+  margin: 22px 0 34px;
+  color: var(--muted);
+  font-size: 1.08rem;
+  line-height: 1.55;
+}
+
+.record-button {
+  width: 100%;
+  min-height: 92px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--accent);
+  color: oklch(99% 0.004 28);
+  font-size: 1.2rem;
+  font-weight: 780;
+  cursor: pointer;
+  box-shadow: 0 18px 42px oklch(55% 0.18 28 / 0.22);
+  transition: transform 160ms ease-out, background 160ms ease-out;
+  user-select: none;
+}
+
+.record-button:hover {
+  background: var(--accent-strong);
+}
+
+.record-button:active,
+.record-button.is-recording {
+  transform: translateY(2px);
+}
+
+.record-button.is-recording {
+  background: var(--danger);
+}
+
+.record-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.record-button.is-recording .record-dot {
+  animation: pulse 900ms ease-out infinite;
+}
+
+.status {
+  min-height: 28px;
+  margin: 14px 0 24px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.status.error {
+  color: var(--danger);
+}
+
+.status.ok {
+  color: var(--ok);
+}
+
+.output-label {
+  display: block;
+  margin-bottom: 9px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.transcript {
+  width: 100%;
+  min-height: 210px;
+  resize: vertical;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  color: var(--text);
+  padding: 18px;
+  line-height: 1.5;
+  outline: none;
+  box-shadow: 0 1px 0 oklch(100% 0 0 / 0.7) inset;
+}
+
+.transcript:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 14px;
+}
+
+.secondary,
+.ghost {
+  min-width: 92px;
+  min-height: 40px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--text);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.secondary:not(:disabled):hover,
+.ghost:hover {
+  border-color: oklch(78% 0.018 235);
+}
+
+.secondary:disabled {
+  color: oklch(70% 0.012 235);
+  cursor: default;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  70% {
+    opacity: 0.45;
+    transform: scale(1.35);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 560px) {
+  .shell {
+    align-items: start;
+    padding: 22px;
+  }
+
+  .topline {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  h1 {
+    font-size: 4rem;
+  }
+
+  .record-button {
+    min-height: 78px;
+  }
+}
